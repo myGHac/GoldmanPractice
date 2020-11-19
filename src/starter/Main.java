@@ -47,8 +47,6 @@ public class Main extends JPanel {
 
     }
 
-    // Move only one quadrant
-    // direction VALUE (1 - UP, 2 - DOWN, 3 - LEFT, 4 - RIGHT
     void move(int direction) throws Exception {
 
    data[y][x] = "G";
@@ -73,72 +71,59 @@ public class Main extends JPanel {
     }
 
 
-    void moveRandom() throws Exception {
+    void moveRandom() throws Exception {       //Игрок просто ходит
+        int max = 4;
+        int min = 1;
+        int direction = (int) (Math.random() * ((max - min) + 1)) + min;
 
-        System.out.println("y = " + y + "x = " + x);
-        do {
+        switch (direction) {
+                case 1:
+                    while (y < 11) {
+                        data[y][x] = "G";
+                        y++;
+                        data[y][x] = "P";
+                        data[y - 1][x] = "GG";
+                        countSteps--;
+                        drawTable();
+                        Thread.sleep(1000);
+                        moveRandom();
+                    }
+                case 2:
+                    while (x < 9) {
+                        data[y][x] = "G";
+                        x++;
+                        data[y][x] = "P";
+                        data[y][x - 1] = "GG";
+                        countSteps--;
+                        drawTable();
+                        Thread.sleep(1000);
+                        moveRandom();
+                    }
 
-            data[y][x] = "G";
-            data[y][x] = "P";
-            countSteps--;
-            y++;
-            x++;
-            drawTable();
-            Thread.sleep(1000);
-        } while (countSteps > 0);
-
-
-
-        // data[y][x]
-//       int direction = 1;
-//
-//      switch (direction) {          // Игрок убивает монстров и собирает золото
-//           case 1:
-//               while ((y>0) & (y <11)) {
-//                    {
-//                       move(direction);
-//                   }
-//             //   continue;
-//               }
-//               gameStatus = "Game Over!!!";
-//               drawTable();
-//
-//           //    break;
-//          case 2:
-//               while (y<11) {
-//                   if (data[y+1][x].equals("G") | data[y+1][x].equals("GG")| data[y+1][x].equals("M")) {
-//
-//                       move(direction);
-//                   }
-//                  // else continue;
-//               }
-//               gameStatus = "Game Over!!!";
-//               drawTable();
-////               break;
-//           case 3:
-//               while (x>0) {
-//                   if (data[y][x-1].equals("G") | data[y][x-1].equals("GG") | data[y][x-1].equals("M") ) {
-//
-//                       move(direction);
-//                   }
-//               //    else break;
-//               }
-//               gameStatus = "Game Over!!!";
-//               drawTable();
-////               break;
-//          case 4:
-//               while (x<10) {
-//                   if (data[y][x+1].equals("G") | data[y][x+1].equals("GG") | data[y][x+1].equals("M") ) {
-//
-//                       move(direction);
-//                   }
-//             //      else break;
-//               }
-//               gameStatus = "Game Over!!!";
-//               drawTable();
-////               break;
+                case 3:
+                    while (y > 0) {
+                        data[y][x] = "G";
+                        y--;
+                        data[y][x] = "P";
+                        data[y + 1][x] = "GG";
+                        countSteps--;
+                        drawTable();
+                        Thread.sleep(1000);
+                        moveRandom();
+                    }
+                case 4:
+                    while (x > 0) {
+                        data[y][x] = "G";
+                        x--;
+                        data[y][x] = "P";
+                        data[y][x + 1] = "GG";
+                        countSteps--;
+                        drawTable();
+                        Thread.sleep(1000);
+                        moveRandom();
+                    }
+            }
     }
-
 
     void runTheGame() throws Exception {
 
@@ -147,8 +132,7 @@ public class Main extends JPanel {
         Scanner sc = new Scanner(System.in);
         int direction = sc.nextInt();
 
-
-        switch (direction) {          // Игрок убивает монстров и собирает золото
+        switch (direction) {          // Игрок убивает монстров и собирает золото только в выбранном направлении
             case 1:
                 while (y>0) {
                     if (data[y-1][x].equals("G") | data[y-1][x].equals("GG") | data[y-1][x].equals("M")) {     // Игрок убивает монстров и собирает золото
@@ -194,13 +178,11 @@ public class Main extends JPanel {
                 drawTable();
                 break;
         }
-
-        //moveRandom();
+        System.out.println("Небольшая передышка!");
+        Thread.sleep(3000);                       // Задержка перед следующим методом
+        gameStatus = "Game Start !!!";
+        moveRandom();                                   // Игрок просто ходит
     }
-       // gameStatus = "Game Over!!!";
-     //   drawTable();
-//        System.out.println(data[0][7]);
-//        System.out.println("y = " + y);
 
 
 
