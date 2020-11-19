@@ -66,7 +66,7 @@ public class Main extends JPanel {
         }
         data[y][x] = "P";
         countSteps--;
-        Thread.sleep(1000);
+        Thread.sleep(800);
    drawTable();
     }
 
@@ -79,48 +79,56 @@ public class Main extends JPanel {
         switch (direction) {
                 case 1:
                     while (y < 11) {
+                        if (data[y+1][x].equals("G") | data[y+1][x].equals("GG") | data[y+1][x].equals("M")) {
                         data[y][x] = "G";
                         y++;
                         data[y][x] = "P";
-                        data[y - 1][x] = "GG";
+                        data[y - 1][x] = "G";
                         countSteps--;
                         drawTable();
-                        Thread.sleep(1000);
-                        moveRandom();
+                        Thread.sleep(600);
+                        moveRandom();}
+                        else moveRandom();
                     }
                 case 2:
                     while (x < 9) {
+                        if (data[y][x+1].equals("G") | data[y][x+1].equals("GG") | data[y][x+1].equals("M")) {
                         data[y][x] = "G";
                         x++;
                         data[y][x] = "P";
-                        data[y][x - 1] = "GG";
+                        data[y][x - 1] = "G";
                         countSteps--;
                         drawTable();
-                        Thread.sleep(1000);
-                        moveRandom();
+                        Thread.sleep(600);
+                        moveRandom();}
+                        else moveRandom();
                     }
 
                 case 3:
                     while (y > 0) {
+                        if (data[y-1][x].equals("G") | data[y-1][x].equals("GG") | data[y-1][x].equals("M")) {
                         data[y][x] = "G";
                         y--;
                         data[y][x] = "P";
-                        data[y + 1][x] = "GG";
+                        data[y + 1][x] = "G";
                         countSteps--;
                         drawTable();
-                        Thread.sleep(1000);
-                        moveRandom();
+                        Thread.sleep(600);
+                        moveRandom();}
+                        else moveRandom();
                     }
                 case 4:
                     while (x > 0) {
+                        if (data[y][x-1].equals("G") | data[y][x-1].equals("GG") | data[y][x-1].equals("M")) {
                         data[y][x] = "G";
                         x--;
                         data[y][x] = "P";
-                        data[y][x + 1] = "GG";
+                        data[y][x + 1] = "G";
                         countSteps--;
                         drawTable();
-                        Thread.sleep(1000);
-                        moveRandom();
+                        Thread.sleep(600);
+                        moveRandom();}
+                        else moveRandom();
                     }
             }
     }
@@ -135,8 +143,8 @@ public class Main extends JPanel {
         switch (direction) {          // Игрок убивает монстров и собирает золото только в выбранном направлении
             case 1:
                 while (y>0) {
-                    if (data[y-1][x].equals("G") | data[y-1][x].equals("GG") | data[y-1][x].equals("M")) {     // Игрок убивает монстров и собирает золото
-                        //    if (data[y-1][x].equals("G")) {                                                   // Игрок ходит только, когда земля
+                   if (data[y-1][x].equals("G") | data[y-1][x].equals("GG") | data[y-1][x].equals("M")) {     // Игрок убивает монстров и собирает золото
+                   //         if (data[y-1][x].equals("G")) {                                                   // Игрок ходит только, когда земля
                         move(direction);
                     }
                     else break;
@@ -147,7 +155,7 @@ public class Main extends JPanel {
             case 2:
                 while (y<11) {
                     if (data[y+1][x].equals("G") | data[y+1][x].equals("GG")| data[y+1][x].equals("M")) {    // Игрок убивает монстров и собирает золото
-                        //     if (data[y+1][x].equals("G")) {                                                        // Игрок ходит только, когда земля
+                    //        if (data[y+1][x].equals("G")) {                                                        // Игрок ходит только, когда земля
                         move(direction);
                     }
                     else break;
@@ -158,7 +166,7 @@ public class Main extends JPanel {
             case 3:
                 while (x>0) {
                     if (data[y][x-1].equals("G") | data[y][x-1].equals("GG") | data[y][x-1].equals("M") ) {   // Игрок убивает монстров и собирает золото
-                        //      if (data[y][x-1].equals("G")) {                                                         // Игрок ходит только, когда земля
+                      //        if (data[y][x-1].equals("G")) {                                                         // Игрок ходит только, когда земля
                         move(direction);
                     }
                     else break;
@@ -169,7 +177,7 @@ public class Main extends JPanel {
             case 4:
                 while (x<10) {
                     if (data[y][x+1].equals("G") | data[y][x+1].equals("GG") | data[y][x+1].equals("M") ) {      // Игрок убивает монстров и собирает золото
-                        //  if (data[y][x+1].equals("G")) {                                                             // Игрок ходит только, когда земля
+                     //     if (data[y][x+1].equals("G")) {                                                             // Игрок ходит только, когда земля
                         move(direction);
                     }
                     else break;
@@ -179,7 +187,7 @@ public class Main extends JPanel {
                 break;
         }
         System.out.println("Небольшая передышка!");
-        Thread.sleep(3000);                       // Задержка перед следующим методом
+        Thread.sleep(2000);                       // Задержка перед следующим методом
         gameStatus = "Game Start !!!";
         moveRandom();                                   // Игрок просто ходит
     }
