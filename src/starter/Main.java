@@ -11,36 +11,26 @@ public class Main extends JPanel {
     final int BF_WIDTH = 576;
     final int BF_HEIGHT = 576;
 
-    int y = 6;
-    int x = 7;
+//   int y = 6;
+//   int x = 7;
 
+//    int y;
+//    int x;
 
     int score = 0;
     int countSteps = 50;
     String gameStatus = "Play Game :)";
 
 // B - Brick, GG - Gold, P - Player, G - Ground, E - Exit
-    String[][] data = {
-            {"B", "G", "B", "B", "B", "B", "B", "G", "B", "B", "G"},
-            {"GG", "G", "G", "GG", "GG", "GG", "E", "B", "B", "B", "G"},
-            {"G", "G", "B", "B", "G", "B", "B", "G", "B", "B", "G"},
-            {"G", "G", "B", "B", "M", "B", "B", "M", "B", "B", "G"},
-            {"GG", "G", "G", "B", "B", "B", "B", "G", "B", "B", "G"},
-            {"G", "M", "B", "B", "B", "B", "B", "G", "B", "B", "G"},
-            {"G", "B", "G", "G", "G", "G", "G", "P", "B", "B", "G"},
-            {"G", "G", "G", "B", "B", "GG", "G", "GG", "B", "B", "G"},
-            {"M", "B", "B", "B", "B", "B", "B", "B", "B", "B", "G"},
-            {"M", "B", "G", "G", "G", "G", "G", "G", "B", "B", "G"},
-            {"G", "G", "G", "B", "B", "G", "G", "G", "B", "B", "G"},
-            {"G", "M", "B", "B", "B", "B", "B", "G", "B", "B", "G"}
-    };
+
+    ArrayMap arrayMap = new ArrayMap(6,7);
 
 
     void moveUp() throws Exception {
 
-        data[y][x] = "G";
-        y--;
-        data[y][x] = "P";
+        arrayMap.data[arrayMap.y][arrayMap.x] = "G";
+        arrayMap.y--;
+        arrayMap.data[arrayMap.y][arrayMap.x] = "P";
         countSteps--;
         drawTable();
         Thread.sleep(1000);
@@ -49,22 +39,22 @@ public class Main extends JPanel {
 
     void move(int direction) throws Exception {
 
-   data[y][x] = "G";
+   arrayMap.data[arrayMap.y][arrayMap.x] = "G";
         switch (direction) {
             case 1:
-               y--;
+                arrayMap.y--;
                 break;
             case 2:
-                y++;
+                arrayMap.y++;
                 break;
             case 3:
-                x--;
+                arrayMap.x--;
                 break;
             case 4:
-                x++;
+                arrayMap.x++;
                 break;
         }
-        data[y][x] = "P";
+        arrayMap.data[arrayMap.y][arrayMap.x] = "P";
         countSteps--;
         Thread.sleep(800);
    drawTable();
@@ -78,12 +68,13 @@ public class Main extends JPanel {
 
         switch (direction) {
                 case 1:
-                    while (y < 11) {
-                        if (data[y+1][x].equals("G") | data[y+1][x].equals("GG") | data[y+1][x].equals("M")) {
-                        data[y][x] = "G";
-                        y++;
-                        data[y][x] = "P";
-                        data[y - 1][x] = "G";
+                    while (arrayMap.y < 11) {
+                        if (arrayMap.data[arrayMap.y+1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y+1][arrayMap.x].equals("GG")
+                                | arrayMap.data[arrayMap.y+1][arrayMap.x].equals("M")) {
+                        arrayMap.data[arrayMap.y][arrayMap.x] = "G";
+                            arrayMap.y++;
+                        arrayMap.data[arrayMap.y][arrayMap.x] = "P";
+                        arrayMap.data[arrayMap.y - 1][arrayMap.x] = "G";
                         countSteps--;
                         drawTable();
                         Thread.sleep(600);
@@ -91,12 +82,13 @@ public class Main extends JPanel {
                         else moveRandom();
                     }
                 case 2:
-                    while (x < 9) {
-                        if (data[y][x+1].equals("G") | data[y][x+1].equals("GG") | data[y][x+1].equals("M")) {
-                        data[y][x] = "G";
-                        x++;
-                        data[y][x] = "P";
-                        data[y][x - 1] = "G";
+                    while (arrayMap.x < 9) {
+                        if (arrayMap.data[arrayMap.y][arrayMap.x+1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x+1].equals("GG")
+                                | arrayMap.data[arrayMap.y][arrayMap.x+1].equals("M")) {
+                        arrayMap.data[arrayMap.y][arrayMap.x] = "G";
+                            arrayMap.x++;
+                        arrayMap.data[arrayMap.y][arrayMap.x] = "P";
+                        arrayMap.data[arrayMap.y][arrayMap.x - 1] = "G";
                         countSteps--;
                         drawTable();
                         Thread.sleep(600);
@@ -105,12 +97,13 @@ public class Main extends JPanel {
                     }
 
                 case 3:
-                    while (y > 0) {
-                        if (data[y-1][x].equals("G") | data[y-1][x].equals("GG") | data[y-1][x].equals("M")) {
-                        data[y][x] = "G";
-                        y--;
-                        data[y][x] = "P";
-                        data[y + 1][x] = "G";
+                    while (arrayMap.y > 0) {
+                        if (arrayMap.data[arrayMap.y-1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y-1][arrayMap.x].equals("GG")
+                                | arrayMap.data[arrayMap.y-1][arrayMap.x].equals("M")) {
+                        arrayMap.data[arrayMap.y][arrayMap.x] = "G";
+                            arrayMap.y--;
+                            arrayMap.data[arrayMap.y][arrayMap.x] = "P";
+                            arrayMap.data[arrayMap.y + 1][arrayMap.x] = "G";
                         countSteps--;
                         drawTable();
                         Thread.sleep(600);
@@ -118,12 +111,13 @@ public class Main extends JPanel {
                         else moveRandom();
                     }
                 case 4:
-                    while (x > 0) {
-                        if (data[y][x-1].equals("G") | data[y][x-1].equals("GG") | data[y][x-1].equals("M")) {
-                        data[y][x] = "G";
-                        x--;
-                        data[y][x] = "P";
-                        data[y][x + 1] = "G";
+                    while (arrayMap.x > 0) {
+                        if (arrayMap.data[arrayMap.y][arrayMap.x-1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x-1].equals("GG")
+                                | arrayMap.data[arrayMap.y][arrayMap.x-1].equals("M")) {
+                            arrayMap.data[arrayMap.y][arrayMap.x] = "G";
+                            arrayMap.x--;
+                            arrayMap.data[arrayMap.y][arrayMap.x] = "P";
+                            arrayMap.data[arrayMap.y][arrayMap.x + 1] = "G";
                         countSteps--;
                         drawTable();
                         Thread.sleep(600);
@@ -142,8 +136,9 @@ public class Main extends JPanel {
 
         switch (direction) {          // Игрок убивает монстров и собирает золото только в выбранном направлении
             case 1:
-                while (y>0) {
-                   if (data[y-1][x].equals("G") | data[y-1][x].equals("GG") | data[y-1][x].equals("M")) {     // Игрок убивает монстров и собирает золото
+                while (arrayMap.y>0) {
+                   if (arrayMap.data[arrayMap.y-1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y-1][arrayMap.x].equals("GG") |
+                           arrayMap.data[arrayMap.y-1][arrayMap.x].equals("M")) {     // Игрок убивает монстров и собирает золото
                    //         if (data[y-1][x].equals("G")) {                                                   // Игрок ходит только, когда земля
                         move(direction);
                     }
@@ -153,8 +148,9 @@ public class Main extends JPanel {
                 drawTable();
                 break;
             case 2:
-                while (y<11) {
-                    if (data[y+1][x].equals("G") | data[y+1][x].equals("GG")| data[y+1][x].equals("M")) {    // Игрок убивает монстров и собирает золото
+                while (arrayMap.y<11) {
+                    if (arrayMap.data[arrayMap.y+1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y+1][arrayMap.x].equals("GG")|
+                            arrayMap.data[arrayMap.y+1][arrayMap.x].equals("M")) {    // Игрок убивает монстров и собирает золото
                     //        if (data[y+1][x].equals("G")) {                                                        // Игрок ходит только, когда земля
                         move(direction);
                     }
@@ -164,8 +160,9 @@ public class Main extends JPanel {
                 drawTable();
                 break;
             case 3:
-                while (x>0) {
-                    if (data[y][x-1].equals("G") | data[y][x-1].equals("GG") | data[y][x-1].equals("M") ) {   // Игрок убивает монстров и собирает золото
+                while (arrayMap.x>0) {
+                    if (arrayMap.data[arrayMap.y][arrayMap.x-1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x-1].equals("GG") |
+                            arrayMap.data[arrayMap.y][arrayMap.x-1].equals("M") ) {   // Игрок убивает монстров и собирает золото
                       //        if (data[y][x-1].equals("G")) {                                                         // Игрок ходит только, когда земля
                         move(direction);
                     }
@@ -175,8 +172,9 @@ public class Main extends JPanel {
                 drawTable();
                 break;
             case 4:
-                while (x<10) {
-                    if (data[y][x+1].equals("G") | data[y][x+1].equals("GG") | data[y][x+1].equals("M") ) {      // Игрок убивает монстров и собирает золото
+                while (arrayMap.x<10) {
+                    if (arrayMap.data[arrayMap.y][arrayMap.x+1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x+1].equals("GG") |
+                            arrayMap.data[arrayMap.y][arrayMap.x+1].equals("M") ) {      // Игрок убивает монстров и собирает золото
                      //     if (data[y][x+1].equals("G")) {                                                             // Игрок ходит только, когда земля
                         move(direction);
                     }
@@ -200,6 +198,9 @@ public class Main extends JPanel {
     public static void main(String[] args) throws Exception {
         Main main = new Main();
         main.runTheGame();
+
+
+
     }
 
 
@@ -257,7 +258,7 @@ public class Main extends JPanel {
     private void drawTable() {
 
 
-        table.setModel(new DefaultTableModel(data, column));
+        table.setModel(new DefaultTableModel(arrayMap.data, column));
 
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(new ImageRenderer_DONT_TOUCH_THIS_FILE());
