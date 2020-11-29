@@ -11,17 +11,9 @@ public class Main extends JPanel {
     final int BF_WIDTH = 576;
     final int BF_HEIGHT = 576;
 
-//   int y = 6;
-//   int x = 7;
-
-//    int y;
-//    int x;
-
     int score = 0;
     int countSteps = 50;
     String gameStatus = "Play Game :)";
-
-// B - Brick, GG - Gold, P - Player, G - Ground, E - Exit
 
     ArrayMap arrayMap = new ArrayMap(6,7);
 
@@ -69,7 +61,8 @@ public class Main extends JPanel {
         switch (direction) {
                 case 1:
                     while (arrayMap.y < 11) {
-                        if (arrayMap.data[arrayMap.y+1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y+1][arrayMap.x].equals("GG")
+                        if (arrayMap.data[arrayMap.y+1][arrayMap.x].equals("G") |
+                                arrayMap.data[arrayMap.y+1][arrayMap.x].equals("GG")
                                 | arrayMap.data[arrayMap.y+1][arrayMap.x].equals("M")) {
                         arrayMap.data[arrayMap.y][arrayMap.x] = "G";
                             arrayMap.y++;
@@ -83,7 +76,8 @@ public class Main extends JPanel {
                     }
                 case 2:
                     while (arrayMap.x < 9) {
-                        if (arrayMap.data[arrayMap.y][arrayMap.x+1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x+1].equals("GG")
+                        if (arrayMap.data[arrayMap.y][arrayMap.x+1].equals("G") |
+                                arrayMap.data[arrayMap.y][arrayMap.x+1].equals("GG")
                                 | arrayMap.data[arrayMap.y][arrayMap.x+1].equals("M")) {
                         arrayMap.data[arrayMap.y][arrayMap.x] = "G";
                             arrayMap.x++;
@@ -98,7 +92,8 @@ public class Main extends JPanel {
 
                 case 3:
                     while (arrayMap.y > 0) {
-                        if (arrayMap.data[arrayMap.y-1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y-1][arrayMap.x].equals("GG")
+                        if (arrayMap.data[arrayMap.y-1][arrayMap.x].equals("G") |
+                                arrayMap.data[arrayMap.y-1][arrayMap.x].equals("GG")
                                 | arrayMap.data[arrayMap.y-1][arrayMap.x].equals("M")) {
                         arrayMap.data[arrayMap.y][arrayMap.x] = "G";
                             arrayMap.y--;
@@ -112,7 +107,8 @@ public class Main extends JPanel {
                     }
                 case 4:
                     while (arrayMap.x > 0) {
-                        if (arrayMap.data[arrayMap.y][arrayMap.x-1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x-1].equals("GG")
+                        if (arrayMap.data[arrayMap.y][arrayMap.x-1].equals("G") |
+                                arrayMap.data[arrayMap.y][arrayMap.x-1].equals("GG")
                                 | arrayMap.data[arrayMap.y][arrayMap.x-1].equals("M")) {
                             arrayMap.data[arrayMap.y][arrayMap.x] = "G";
                             arrayMap.x--;
@@ -137,7 +133,8 @@ public class Main extends JPanel {
         switch (direction) {          // Игрок убивает монстров и собирает золото только в выбранном направлении
             case 1:
                 while (arrayMap.y>0) {
-                   if (arrayMap.data[arrayMap.y-1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y-1][arrayMap.x].equals("GG") |
+                   if (arrayMap.data[arrayMap.y-1][arrayMap.x].equals("G") |
+                           arrayMap.data[arrayMap.y-1][arrayMap.x].equals("GG") |
                            arrayMap.data[arrayMap.y-1][arrayMap.x].equals("M")) {     // Игрок убивает монстров и собирает золото
                    //         if (data[y-1][x].equals("G")) {                                                   // Игрок ходит только, когда земля
                         move(direction);
@@ -149,7 +146,8 @@ public class Main extends JPanel {
                 break;
             case 2:
                 while (arrayMap.y<11) {
-                    if (arrayMap.data[arrayMap.y+1][arrayMap.x].equals("G") | arrayMap.data[arrayMap.y+1][arrayMap.x].equals("GG")|
+                    if (arrayMap.data[arrayMap.y+1][arrayMap.x].equals("G") |
+                            arrayMap.data[arrayMap.y+1][arrayMap.x].equals("GG")|
                             arrayMap.data[arrayMap.y+1][arrayMap.x].equals("M")) {    // Игрок убивает монстров и собирает золото
                     //        if (data[y+1][x].equals("G")) {                                                        // Игрок ходит только, когда земля
                         move(direction);
@@ -161,7 +159,8 @@ public class Main extends JPanel {
                 break;
             case 3:
                 while (arrayMap.x>0) {
-                    if (arrayMap.data[arrayMap.y][arrayMap.x-1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x-1].equals("GG") |
+                    if (arrayMap.data[arrayMap.y][arrayMap.x-1].equals("G") |
+                            arrayMap.data[arrayMap.y][arrayMap.x-1].equals("GG") |
                             arrayMap.data[arrayMap.y][arrayMap.x-1].equals("M") ) {   // Игрок убивает монстров и собирает золото
                       //        if (data[y][x-1].equals("G")) {                                                         // Игрок ходит только, когда земля
                         move(direction);
@@ -173,7 +172,8 @@ public class Main extends JPanel {
                 break;
             case 4:
                 while (arrayMap.x<10) {
-                    if (arrayMap.data[arrayMap.y][arrayMap.x+1].equals("G") | arrayMap.data[arrayMap.y][arrayMap.x+1].equals("GG") |
+                    if (arrayMap.data[arrayMap.y][arrayMap.x+1].equals("G") |
+                            arrayMap.data[arrayMap.y][arrayMap.x+1].equals("GG") |
                             arrayMap.data[arrayMap.y][arrayMap.x+1].equals("M") ) {      // Игрок убивает монстров и собирает золото
                      //     if (data[y][x+1].equals("G")) {                                                             // Игрок ходит только, когда земля
                         move(direction);
@@ -198,8 +198,6 @@ public class Main extends JPanel {
     public static void main(String[] args) throws Exception {
         Main main = new Main();
         main.runTheGame();
-
-
 
     }
 
